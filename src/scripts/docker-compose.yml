@@ -1,0 +1,38 @@
+version: '3.4'
+
+networks:
+  openai:
+    external: true
+
+services:
+  openairestapi:
+    build: 
+      context: ../openairestapi
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8000:80"
+      - "8002:6000"  
+    networks:
+      - openai
+
+  prometheus:
+    build: 
+      context: ./prometheus
+    depends_on:
+      - openairestapi
+    ports:
+      - 9090:9090
+    networks:
+      - openai
+
+  grafana:
+    build: 
+      context: ./grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    networks:
+      - openai

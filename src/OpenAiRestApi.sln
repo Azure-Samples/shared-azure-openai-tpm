@@ -1,0 +1,108 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAiRestApi", "openairestapi\OpenAiRestApi.csproj", "{98AC964E-0220-43FE-9A54-8834E68B7340}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "client\Client.csproj", "{BCEE0AC6-6F67-427F-9B32-5C875A133F3B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F0C46850-366E-4E57-BA31-5EC716F9F2ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{8376CE6C-1C64-4F9E-9C01-1374A3863EB5}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\create-network.sh = scripts\create-network.sh
+		scripts\docker-compose.yml = scripts\docker-compose.yml
+		scripts\down.sh = scripts\down.sh
+		scripts\test.sh = scripts\test.sh
+		scripts\up.sh = scripts\up.sh
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana", "grafana", "{95342587-454C-4B9B-8A92-E9EDA6F61054}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\grafana\Dockerfile = Scripts\grafana\Dockerfile
+		Scripts\grafana\prometheus-connector.yml = Scripts\grafana\prometheus-connector.yml
+		Scripts\grafana\prometheus-dashboards.yml = Scripts\grafana\prometheus-dashboards.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{8C2C64EB-DD2F-41A8-BDD3-687991FA7E08}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\prometheus\Dockerfile = Scripts\prometheus\Dockerfile
+		Scripts\prometheus\prometheus.yml = Scripts\prometheus\prometheus.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboards", "dashboards", "{1AF31E25-45D1-44FF-8F70-8D28A5B8C37F}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\grafana\dashboards\dotnet-performance-counters-dashboard.json = scripts\grafana\dashboards\dotnet-performance-counters-dashboard.json
+		scripts\grafana\dashboards\http-requests-dashboard.json = scripts\grafana\dashboards\http-requests-dashboard.json
+		scripts\grafana\dashboards\openai-tokens.json = scripts\grafana\dashboards\openai-tokens.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aks", "aks", "{D2ADB487-A1BC-4A64-BA6D-F834E7432F49}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\aks\00-variables.sh = scripts\aks\00-variables.sh
+		scripts\aks\01-build-container-image.sh = scripts\aks\01-build-container-image.sh
+		scripts\aks\02-push-docker-image.sh = scripts\aks\02-push-docker-image.sh
+		scripts\aks\03-enable-oidc.sh = scripts\aks\03-enable-oidc.sh
+		scripts\aks\04-enable-workload-identity.sh = scripts\aks\04-enable-workload-identity.sh
+		scripts\aks\05-install-azure-ad-workload-cli.sh = scripts\aks\05-install-azure-ad-workload-cli.sh
+		scripts\aks\06-create-key-vault-and-secrets.sh = scripts\aks\06-create-key-vault-and-secrets.sh
+		scripts\aks\07-create-workload-managed-identity.sh = scripts\aks\07-create-workload-managed-identity.sh
+		scripts\aks\08-create-service-account.sh = scripts\aks\08-create-service-account.sh
+		scripts\aks\09-create-nginx-ingress-controller.sh = scripts\aks\09-create-nginx-ingress-controller.sh
+		scripts\aks\10-configure-dns-records.sh = scripts\aks\10-configure-dns-records.sh
+		scripts\aks\11-install-cert-manager.sh = scripts\aks\11-install-cert-manager.sh
+		scripts\aks\12-create-default-backend.sh = scripts\aks\12-create-default-backend.sh
+		scripts\aks\13-deploy-workload-using-kubectl.sh = scripts\aks\13-deploy-workload-using-kubectl.sh
+		scripts\aks\14-create-test-service-principal.sh = scripts\aks\14-create-test-service-principal.sh
+		scripts\aks\15-deploy-ama-configmap.sh = scripts\aks\15-deploy-ama-configmap.sh
+		scripts\aks\16-install-kube-prometheus-stack.sh = scripts\aks\16-install-kube-prometheus-stack.sh
+		scripts\aks\ama-metrics-prometheus-config-node.yml = scripts\aks\ama-metrics-prometheus-config-node.yml
+		scripts\aks\ama-metrics-prometheus-config.yml = scripts\aks\ama-metrics-prometheus-config.yml
+		scripts\aks\azure-managed-grafana-openai-dashboard.json.json = scripts\aks\azure-managed-grafana-openai-dashboard.json.json
+		scripts\aks\cluster-issuer.yml = scripts\aks\cluster-issuer.yml
+		scripts\aks\configmap-appsettings.yml = scripts\aks\configmap-appsettings.yml
+		scripts\aks\configmap-keyvault.yml = scripts\aks\configmap-keyvault.yml
+		scripts\aks\default-backend.yml = scripts\aks\default-backend.yml
+		scripts\aks\deployment-appsettings.yml = scripts\aks\deployment-appsettings.yml
+		scripts\aks\deployment-keyvault.yml = scripts\aks\deployment-keyvault.yml
+		scripts\aks\ingress-grpc.yml = scripts\aks\ingress-grpc.yml
+		scripts\aks\ingress-http.yml = scripts\aks\ingress-http.yml
+		scripts\aks\kube-prometheus-stack-chart-values.yml = scripts\aks\kube-prometheus-stack-chart-values.yml
+		scripts\aks\kube-prometheus-stack-custom-values.yml = scripts\aks\kube-prometheus-stack-custom-values.yml
+		scripts\aks\kube-prometheus-stack-openai-grafana-dashboard.json = scripts\aks\kube-prometheus-stack-openai-grafana-dashboard.json
+		scripts\aks\service.yml = scripts\aks\service.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98AC964E-0220-43FE-9A54-8834E68B7340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98AC964E-0220-43FE-9A54-8834E68B7340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98AC964E-0220-43FE-9A54-8834E68B7340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98AC964E-0220-43FE-9A54-8834E68B7340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCEE0AC6-6F67-427F-9B32-5C875A133F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCEE0AC6-6F67-427F-9B32-5C875A133F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCEE0AC6-6F67-427F-9B32-5C875A133F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCEE0AC6-6F67-427F-9B32-5C875A133F3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0C46850-366E-4E57-BA31-5EC716F9F2ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0C46850-366E-4E57-BA31-5EC716F9F2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0C46850-366E-4E57-BA31-5EC716F9F2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0C46850-366E-4E57-BA31-5EC716F9F2ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{95342587-454C-4B9B-8A92-E9EDA6F61054} = {8376CE6C-1C64-4F9E-9C01-1374A3863EB5}
+		{8C2C64EB-DD2F-41A8-BDD3-687991FA7E08} = {8376CE6C-1C64-4F9E-9C01-1374A3863EB5}
+		{1AF31E25-45D1-44FF-8F70-8D28A5B8C37F} = {95342587-454C-4B9B-8A92-E9EDA6F61054}
+		{D2ADB487-A1BC-4A64-BA6D-F834E7432F49} = {8376CE6C-1C64-4F9E-9C01-1374A3863EB5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {520DC597-E077-4A53-884F-2B97709F390E}
+	EndGlobalSection
+EndGlobal
