@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openai
+  labels:
+    app: openai
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: openai
+      azure.workload.identity/use: "true"
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "80"
+      labels:
+        app: openai
+        azure.workload.identity/use: "true"
+    spec:
+      serviceAccountName: openai-sa
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: openai
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: openai
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: openai
+        image: paolosalvatori.azurecr.io/openai:v1
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 6000
+          name: grpc
+        livenessProbe:
+          httpGet:
+            path: /openai/echo?tenant=contoso&value=100
+            port: 80
+          failureThreshold: 1
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /openai/echo?tenant=contoso&value=100
+            port: 80
+          failureThreshold: 1
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
+        startupProbe:
+          httpGet:
+            path: /openai/echo?tenant=contoso&value=100
+            port: 80
+          failureThreshold: 1
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+                name: openai
+                key: aspNetCoreEnvironment
+        - name: KeyVaultName
+          valueFrom:
+            configMapKeyRef:
+                name: openai
+                key: keyVaultName

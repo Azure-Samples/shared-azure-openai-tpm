@@ -1,0 +1,42 @@
+version: '3.4'
+
+networks:
+  openai:
+    external: true
+
+services:
+  openairestapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - AZURE_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+      - AZURE_TENANT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+      - AZURE_CLIENT_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    ports:
+      - "8000:80"
+      - "8001:443"
+      - "8002:6000"  
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    networks:
+      - openai
+
+  prometheus:
+    build: 
+      context: ./scripts/prometheus
+    depends_on:
+      - openairestapi
+    ports:
+      - 9090:9090
+    networks:
+      - openai
+
+  grafana:
+    build: 
+      context: ./scripts/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    networks:
+      - openai

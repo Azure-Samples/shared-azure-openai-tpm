@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openai
+data:
+  aspNetCoreEnvironment: Production
+  keyVaultName: TanKeyVault

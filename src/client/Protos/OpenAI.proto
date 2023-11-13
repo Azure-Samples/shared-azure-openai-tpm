@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "OpenAiRestApi.Services";
+
+package OpenAiRestApi;
+
+service OpenAIServiceGrpc {
+  rpc Echo(EchoRequest) returns (EchoResponse) {}
+  rpc GetChatCompletions(GetChatCompletionsRequest) returns (GetChatCompletionsResponse) {}
+  rpc GetChatCompletionsStreaming(GetChatCompletionsRequest) returns (stream GetChatCompletionsStreamingResponse) {}
+}
+
+message EchoRequest {
+  string tenant = 1;
+  int32 value = 2;
+}
+
+message EchoResponse {
+  string message = 1;
+}
+
+message GetChatCompletionsRequest {
+  string tenant = 1;
+  repeated GrpcMessage conversation = 2;
+}
+
+message GetChatCompletionsResponse {
+  string result = 1;
+}
+
+message GetChatCompletionsStreamingRequest {
+  string tenant = 1;
+  repeated GrpcMessage conversation = 2;
+}
+
+message GetChatCompletionsStreamingResponse {
+  string message = 1;
+}
+
+message GrpcMessage {
+  string role = 1;
+  string content = 2;
+}
