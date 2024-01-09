@@ -29,7 +29,7 @@
     <PackageReference Include="SharpToken" Version="1.2.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\OpenAI.proto" GrpcServices="Server" />
